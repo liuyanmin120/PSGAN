@@ -34,6 +34,6 @@ class FaceParser:
             image = torch.unsqueeze(image, 0)
             out = self.net(image)[0]
             parsing = out.squeeze(0).argmax(0)
-        parsing = torch.nn.functional.embedding(parsing, self.dic)
+        parsing = torch.nn.functional.embedding(parsing, torch.unsqueeze(self.dic,1))
         return parsing.float()
 
